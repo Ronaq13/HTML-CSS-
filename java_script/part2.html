@@ -4,27 +4,77 @@
         <meta charset="UTF8">
         <title>Color Game</title>
     </head>
-    <body>
+    <body onload="do_game()">
         <script>
             var colors = ["blue","cyan","gold","gray","green","magenta","orange","red","white","yellow"];
-            var condition=true;
-
+            var condition=false;
+            var guess_input;
+            var target;
+            var count=0;
+            var give_color=false;
             function do_game() {
+                    //var count = 0;
+                    //var guess_input;
                     var target_index1 = Math.random()*10;
                     var target_index1 = Math.floor(target_index1);
                     var target_index = target_index1;  
-                    var target = colors[target_index];
+                    target = colors[target_index];
                     alert("\n\n" + "Target color is:"+ " " + target + "\n\n");
 
-                    while(condition)
+                    while(!condition)
                     {
-                        var guess_input =  prompt("I am thinking of one of these colors:"+"\n\n"
+                        guess_input =  prompt("I am thinking of one of these colors:"+"\n\n"
                                                     + colors + "\n\n" + "What color am I thinking of?");
-                        if(guess_input==target)
-                                 condition=false;
+                        count++;                            
+                        condition = check_guess();
                     }   
             }  
-            do_game(); 
+
+            function check_guess() {
+
+                    var flag=0;
+                    for(var i =0; i<colors.length; i++)
+                    {
+                       if(guess_input==colors[i])
+                        { flag=1;}
+                      /*  else
+                        {
+                              alert("Not a color in the array");
+                              return false;
+                        }  */
+                    
+                    }
+                    if(flag==0)
+                    {
+                         alert("\n\nOOOOOOoppppppssssss!!!!"+ "\n\n" + " > Not a color in the array"
+                                + "\n\n" + "Try again.........\n\n");
+                              return false;
+                    }   
+                    if(guess_input>target)
+                    {
+                       alert("\n\n> Your color is higher\n\n");
+                       return false;
+                    }   
+                    else if(guess_input<target)
+                    {
+                       alert("\n\n> Your color is lower\n\n");
+                       return false;
+                    }   
+
+                    else
+                    {
+                        var myBody=document.getElementsByTagName("body")[0];
+                        myBody.style.background = target;  
+                        alert("\n\nCongratulations! You have guessed the color!"
+                        + "\n" + " > It took you " + count + " guesses to finish the game"
+                        +"\n" + "You can see the colour in the background." + "\n\n");
+                        //var myBody=document.getElementsByTagName("body")[0];
+                        //myBody.style.background = target;  
+                        give_color=true;
+                        return true;
+                    }
+
+            }
            
      
             
