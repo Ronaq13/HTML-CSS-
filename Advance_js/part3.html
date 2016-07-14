@@ -46,9 +46,9 @@
                 }
             }    
             var leftSideImages = theLeftSide.cloneNode(true);
-            var rm_node = theLeftSide.removeChild(theLeftSide.lastChild);
-        //    leftSideImages.removeChild(leftSideImages.lastChild);
-              theRightSide.appendChild(leftSideImages);
+            
+            leftSideImages.removeChild(leftSideImages.lastChild);
+            theRightSide.appendChild(leftSideImages);
         </script>
     </body>
 </html>
