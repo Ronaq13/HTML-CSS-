@@ -31,6 +31,7 @@
             var src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
             var numberOfFaces = 5;
             var theLeftSide = document.getElementById("leftSide")
+            var theRightSide = document.getElementById("rightSide");
             function generateFaces()
             {             
                 for(i = 0; i < numberOfFaces; i++)
@@ -43,7 +44,11 @@
                     imgEl.style.left = ran_left + "px";
                     theLeftSide.appendChild(imgEl);
                 }
-            }          
-            </script>
+            }    
+            var leftSideImages = theLeftSide.cloneNode(true);
+            var rm_node = theLeftSide.removeChild(theLeftSide.lastChild);
+        //    leftSideImages.removeChild(leftSideImages.lastChild);
+              theRightSide.appendChild(leftSideImages);
+        </script>
     </body>
 </html>
