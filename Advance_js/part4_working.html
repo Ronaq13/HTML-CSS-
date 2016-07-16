@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Matching Game</title>
+	<meta chatset="UTF8">
+    <style>
+        img {
+            position: absolute;
+        }
+        div {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+        }
+        #rightSide {
+            left: 500px;
+            border-left: 1px solid black;
+        }
+    </style>
+    </head>
+    <body onload="generateFaces();">
+
+
+        <h2>Matching Game</h2>
+        <p>Click the button below:</p><!-- p tag not closed -->
+         <div id="leftSide">
+    </div>
+    <div id="rightSide">
+    </div>
+    <script>
+           
+        var numberOfFaces = 5;
+        var theLeftSide = document.getElementById("leftSide");
+        var theRightSide = document.getElementById("rightSide");
+        var theBody = document.getElementsByTagName("body")[0];
+         function generateFaces() {
+            while (theLeftSide.firstChild) {                         //keep while here
+                theLeftSide.removeChild(theLeftSide.firstChild);
+            }
+            while (theRightSide.firstChild) {
+                theRightSide.removeChild(theRightSide.firstChild);
+            }
+                for(i = 0; i < numberOfFaces; i++)
+                {                      
+                    var imgEl = document.createElement("img");//extra lines removed
+                    imgEl.src = "123.jpg";
+                    imgEl.style.width = "100px";
+                    imgEl.style.height = "100px";
+                    
+					imgEl.style.top = Math.floor(Math.random() * 400) + "px";
+                    imgEl.style.left = Math.floor(Math.random() * 400) + "px";
+                    theLeftSide.appendChild(imgEl);
+                }
+        
+              var leftSideImages = theLeftSide.cloneNode(true);/// should also be in fn. generatefaces()
+              leftSideImages.removeChild(leftSideImages.lastChild);
+              theRightSide.appendChild(leftSideImages);
+            
+            theLeftSide.lastChild.onclick = function nextLevel(event){
+                event.stopPropagation();
+                numberOfFaces += 5;
+                generateFaces();
+            }
+        }
+
+           theBody.onclick = function gameOver() {
+            alert("Game Over!");
+            theBody.onclick = null;
+            theLeftSide.lastChild.onclick = null;
+        }
+        </script>
+    </body>
+</html>
